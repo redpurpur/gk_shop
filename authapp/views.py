@@ -2,25 +2,27 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 
-from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserProfileForm, ShopUserProfileEditForm
 from basket.models import Basket
 from .models import User
 from .utils import send_verify_mail
 
 
 def verify(request, user_id, hash):
-    user = User.objects.get(pk=user_id)
-    if user.activation_key == hash and not user.is_activation_key_expired():
+    user = get_object_or_404(User, pk=user_id)
+    if user.activation_key1 == hash and not user.is_activation_key_expired():
         user.is_active = True
         user.activation_key = None
         user.save()
-        auth.login(request, user)
+        auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         messages.success(request, 'Вы авторизованы, аккаунт активен')
     return render(request, 'authapp/verification.html')
+
 
 
 def login(request):
@@ -62,13 +64,17 @@ def logout(request):
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES, instance=request.user)
-        if form.is_valid():
+        profile_form = ShopUserProfileEditForm(data=request.POST, instance=request.user.shopuserprofile)
+        if form.is_valid() and profile_form.is_valid():
             form.save()
+            profile_form.save()
             return HttpResponseRedirect(reverse('auth:profile'))
     else:
         form = UserProfileForm(instance=request.user)
+        profile_form = ShopUserProfileEditForm(instance=request.user.shopuserprofile)
     context = {
         'form': form,
+        'profile_form': profile_form,
         'baskets': Basket.objects.filter(user=request.user),
     }
     return render(request, 'authapp/profile.html', context)
