@@ -1,0 +1,28 @@
+[
+  {
+    "model": "mainapp.product",
+    "pk": 1,
+    "fields": {
+      "name": "\u0425\u0443\u0434\u0438 \u0447\u0435\u0440\u043d\u043e\u0433\u043e \u0446\u0432\u0435\u0442\u0430 \u0441 \u043c\u043e\u043d\u043e\u0433\u0440\u0430\u043c\u043c\u0430\u043c\u0438 adidas Originals",
+      "image": "products_images/Adidas-hoodie_1C2aHZ8.png",
+      "description": "",
+      "short_description": "",
+      "price": "6090.00",
+      "quantity": 3,
+      "category": 1
+    }
+  },
+  {
+    "model": "mainapp.product",
+    "pk": 2,
+    "fields": {
+      "name": "\u0421\u0438\u043d\u044f\u044f \u043a\u0443\u0440\u0442\u043a\u0430 The North Face",
+      "image": "products_images/Blue-jacket-The-North-Face_Afg6iz9.png",
+      "description": "",
+      "short_description": "",
+      "price": "23725.00",
+      "quantity": 5,
+      "category": 1
+    }
+  }
+]
