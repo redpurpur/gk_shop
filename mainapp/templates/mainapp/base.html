@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load sample_tag %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +48,7 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.username }}
+                        <a class="nav-link" href="{% url 'auth:profile' %}">{{ user.username|cut_words:6 }}
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
