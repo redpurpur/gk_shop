@@ -1,9 +1,11 @@
-{% extends 'ordersapp/base.html' %}
+{% extends 'ordersapp/order_base.html' %}
 {% load static %}
 
 
 {% block content %}
-   <div class="h2 text-center head">
+
+  <div class="container my-4">
+   <div class="h2 text-center row">
        Ваши заказы, 
        {% if user.first_name %}
            {{ user.first_name|title}}
@@ -62,4 +64,6 @@
            новый
        </a>
    </button>
+  </div>
+
 {% endblock %}
