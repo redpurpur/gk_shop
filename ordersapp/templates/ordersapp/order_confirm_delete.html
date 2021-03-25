@@ -1,7 +1,8 @@
-{% extends 'ordersapp/base.html' %}
+{% extends 'ordersapp/order_base.html' %}
 {% load static %}
 
 {% block content %}
+<div class="container my-4">
    <div class="category_delete">
        <div class="h1">Уверены, что хотите удалить?</div>
        {% include 'ordersapp/includes/inc_order_summary.html' %}
@@ -13,5 +14,6 @@
            <a href="{% url 'ordersapp:orders_list' %}">отмена</a>
        </button>
    </div>
+</div>
 {% endblock %}
 
