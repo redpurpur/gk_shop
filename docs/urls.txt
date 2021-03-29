@@ -1,0 +1,4 @@
+http://127.0.0.1:8000/auth/login/ POST username=admin&password=q1w2e3r4
+
+http://127.0.0.1:8000/order/
+http://127.0.0.1:8000/order/create/

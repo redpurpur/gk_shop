@@ -3,4 +3,5 @@ __pycache__/
 db.sqlite3
 
 geekshop/vk.json
-/py_geekshop/
+/py_geekshop
+/static

@@ -112,6 +112,10 @@ class OrderDelete(DeleteView):
     model = Order
     success_url = reverse_lazy('ordersapp:orders_list')
 
+    @method_decorator(login_required())
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch()
+
 
 class OrderRead(DetailView):
     model = Order
@@ -131,12 +135,12 @@ def order_forming_complete(request, pk):
 
 
 def get_product_price(request, pk):
-    if request.is_ajax():
-        product = Product.objects.filter(pk=int(pk)).first()
-        if product:
-            return JsonResponse({'price': product.price})
-        else:
-            return JsonResponse({'price': 0})
+    product = Product.objects.filter(pk=int(pk)).first()
+    if product:
+        return JsonResponse({'price': product.price})
+
+    return JsonResponse({'price': 0})
+
 
 
 ##########

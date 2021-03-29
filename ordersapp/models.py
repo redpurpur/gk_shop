@@ -27,7 +27,7 @@ class Order(models.Model):
                               max_length=3,
                               choices=ORDER_STATUS_CHOICES,
                               default=FORMING)
-    is_active = models.BooleanField(verbose_name='активен', default=True)
+    is_active = models.BooleanField(verbose_name='активен', default=True, db_index=True)
 
     class Meta:
         ordering = ('-created',)
@@ -51,9 +51,15 @@ class Order(models.Model):
 
     # переопределяем метод, удаляющий объект
     def delete(self):
-        for item in self.orderitems.select_related():
+        for item in self.orderitems.select_related():  # 1 запрос и сразу получаем все OrderItems
+            # select_related делает join_table
             item.product.quantity += item.quantity
             item.product.save()
+
+        # for item in self.orderitems:
+        #     # +1 запрос и сразу получаем все OrderItems
+        #     item.product.quantity += item.quantity
+        #     item.product.save()
 
         self.is_active = False
         self.save()
