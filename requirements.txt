@@ -3,3 +3,5 @@ pillow==8.1.2
 social-auth-app-django==3.4.0
 requests==2.25.1
 psycopg2-binary
+python-memcached
+django-redis

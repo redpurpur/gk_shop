@@ -6,3 +6,5 @@ psycopg2-binary
 django-debug-toolbar
 django-debug-toolbar-template-profiler
 django-extensions
+python-memcached
+django-redis
